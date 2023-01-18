@@ -21,9 +21,9 @@ jobs:
     - run: npm-install
     - run: npm test
     - name: run "app.js"
-    - run: node src/frontend/app.js
+      run: node src/frontend/app.js
     - name: Make a new directory "dist"
-    - run: mkdir dist
+      run: mkdir dist
     - name: copy "app.js" into "dist"
-    - run: cp src/frontend/app.js dist
+      run: cp src/frontend/app.js dist
     
