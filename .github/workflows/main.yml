@@ -20,8 +20,10 @@ jobs:
         node-version: 16
     - name: run app
       run: node src/frontend/app.js
-    - name: make new dir and copy .js into dir
+    - name: make new dir + copy .js into dir + add comment line in app.js + display change
       run: |
         mkdir dist
         cp src/frontend/app.js dist/
+        sed -i '1i //' dist/app.js
+        cat dist/app.js
 
