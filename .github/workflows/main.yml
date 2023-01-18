@@ -14,3 +14,16 @@ jobs:
       uses: actions/checkout@v2
     - name: Display content of src/frontend/app.js
       run: cat src/frontend/app.js
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: '14'
+    - run: npm-install
+    - run: npm test
+    - name: run "app.js"
+    - run: node src/frontend/app.js
+    - name: Make a new directory "dist"
+    - run: mkdir dist
+    - name: copy "app.js" into "dist"
+    - run: cp src/frontend/app.js dist
+    
