@@ -1,4 +1,4 @@
-name: Frontend/Backend Workflow "Build and run"
+name: Frontend "Build and run"
 on:
   push:
     branches:
