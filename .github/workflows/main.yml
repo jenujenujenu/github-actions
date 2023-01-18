@@ -1,0 +1,16 @@
+name: Uebung 1
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run a command
+      run: echo "Changes were made to the repository"
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Display content of the repository
+      run: ls -la
