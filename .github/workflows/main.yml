@@ -20,4 +20,8 @@ jobs:
         node-version: 16
     - name: run app
       run: node src/frontend/app.js
+    - name: make new dir and copy .js into dir
+      run: |
+        mkdir dist
+        cp src/frontend/app.js dist/
 
