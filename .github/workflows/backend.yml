@@ -17,7 +17,7 @@ jobs:
           mkdir dist
           cp src/backend/run.py dist/
           sed -i '1i # (date+ '%H:%M:%S')' dist/run.py
-      - name: run python file
-        run: python3 dist/run.py
+      - name: show python file
+        run: cat dist/run.py
           
         
