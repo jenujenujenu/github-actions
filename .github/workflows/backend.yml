@@ -18,6 +18,6 @@ jobs:
           cp src/backend/run.py dist/
           sed -i '1i # ' dist/run.py
       - name: run python file
-        run: python3 run.py
+        run: python3 dist/run.py
           
         
