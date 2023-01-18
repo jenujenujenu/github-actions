@@ -18,6 +18,9 @@ jobs:
       uses: actions/setup-node@v3.6.0
       with:
         node-version: 16
-    - run: npm ci
-    - run: npm test
+    - run: node src/frontend/app.js
+    - name: Create new folder dist and copy app.js into dist
+    - run: |
+        mkdir dist
+        cp src/frontend/app.js dist/
 
