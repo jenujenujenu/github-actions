@@ -12,5 +12,5 @@ jobs:
       run: echo "Changes were made to the repository"
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Display content of the repository
-      run: ls -la
+    - name: Display content of src/frontend/app.js
+      run: cat src/frontend/app.js
