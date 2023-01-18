@@ -17,6 +17,7 @@ jobs:
           mkdir dist
           cp src/backend/run.py dist/
           sed -i '1i # ' dist/run.py
-          python run.py
+      - name: run python file
+        run: python3 run.py
           
         
