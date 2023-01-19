@@ -20,5 +20,5 @@ jobs:
       - name: show python file
         run: cat dist/run.py
       - name: run python file
-        run: python disty/run.py
+        run: python dist/run.py
         
