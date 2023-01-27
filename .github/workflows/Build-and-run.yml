@@ -86,7 +86,7 @@ jobs:
         run: mv bundle.zip repo/
       - name: upload to repo
         run: |
-          git config --global user.name 'jenujenujenu'
+          git config --global user.name 'jenubundler'
           git add bundle.zip
           git commit -m 'Add bundle for commit ${{github.sha}}'
           git push
