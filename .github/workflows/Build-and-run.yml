@@ -89,6 +89,7 @@ jobs:
           git config --global user.name 'jenujenujenu'
           git add bundle.zip
           git commit -m 'Add bundle for commit ${{github.sha}}'
+          git push
         working-directory: repo/
           
       
