@@ -1,0 +1,52 @@
+name: Frontend "Build and run"
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Frontend:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Run a command
+        run: echo "Changes were made to the repository"
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Display content of src/frontend/app.js
+        run: cat src/frontend/app.js
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 16
+      - name: run app
+        run: node src/frontend/app.js
+      - name: make new dir + copy .js into dir + add comment line in app.js + display change + run app in dist
+        run: |
+          mkdir dist
+          cp src/frontend/app.js dist/
+          sed echo '// Built at' $(date) | cat - src/frontend/app.js > dist/app.js
+          cat dist/app.js
+          node dist/app.js
+  Backend:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: create new folder dist and copy run.py in dist + insert comment line with build date
+        run: |
+          mkdir dist
+          cp src/backend/run.py dist/
+          echo '# Built at' $(date) | cat - src/backend/run.py > dist/run
+      - name: show python file
+        run: cat dist/run.py
+      - name: run python file
+        run: python dist/run.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
