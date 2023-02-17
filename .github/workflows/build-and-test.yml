@@ -98,6 +98,7 @@ jobs:
       - name: Upload to repo
         run: |
           git config --global user.name 'Bundle Creator'
+          git config --global user.name "bundle@creator.local"
           git add bundle.zip
           git commit -m 'Add bundle for commit ${{ github.sha }}'
           git push
