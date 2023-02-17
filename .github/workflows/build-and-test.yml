@@ -121,3 +121,29 @@ jobs:
           path: ./docu
 
 
+  calculator-test:
+    name: Test calculator
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v2
+      
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run build with Gradle Wrapper
+        continue-on-error: true
+        run: |
+          chmod +x ./gradlew
+          ./gradlew test
+        working-directory: ./src/calculator/
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: calculator-test
+          path: ./src/calculator/build/reports/tests/test/
+
+
+

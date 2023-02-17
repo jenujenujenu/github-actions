@@ -48,3 +48,17 @@
 1. Erweitern Sie den Workflow, dass er: 
 	1. Die vorhandenen Tests unter `./src/calculator/` ausführt
 	1. Das erstellte Testergebnis (`./src/calculator/build/reports/tests/test/`) als Artefakt hochlädt
+
+
+## Übung 6: Dokumentation, Test und Bundle als Github Page bereitstellen
+
+1. Erweitern Sie den Workflow, dass er: 
+	1. Das erstellte Bundle herunterlädt
+	1. Die Testergebnisse herunterlädt 
+	1. Die Dokumentation herunterlädt
+	1. Die Branch `gh-pages` in ein Arbeitsverzeichnis lädt und: 
+		1. Die Doku in den Unterordner `docu` kopiert
+		1. Die Testergebnisse in den Ordner `tests` kopiert
+		1. Das erstellte Bundle in den Ordner `download` kopiert
+	1. Die Änderungen ins Repository pushed
+
