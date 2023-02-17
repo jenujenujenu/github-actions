@@ -1,0 +1,149 @@
+name: Build and Test
+on: [push]
+
+jobs:
+
+  frontend:
+    name: Build and run frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v2
+
+      - name: Prepare Node.js
+        uses: actions/setup-node@v2
+        with: 
+          node-version: 14.x
+
+      - name: Create dist dir
+        run: mkdir -p dist
+
+      - name: Build (create header)
+        run: echo '// Built at' $(date) | cat - src/frontend/app.js > dist/app.js
+
+      - name: Run built frontend for testing
+        run: node dist/app.js
+
+      - name: Upload frontend
+        uses: actions/upload-artifact@v2
+        with:
+          name: frontend
+          path: dist/
+
+
+  backend: 
+    name: Build and run backend
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout repository content
+        uses: actions/checkout@v2
+
+      - name: Prepare python
+        uses: actions/setup-python@v2
+
+      - name: Create dist dir
+        run: mkdir -p dist
+
+      - name: Build (create header)
+        run: echo '# Built at' $(date) | cat - src/backend/run.py > dist/run.py
+
+      - name: Run built Backend for testing
+        run: python dist/run.py
+
+      - name: Upload backend
+        uses: actions/upload-artifact@v2
+        with:
+          name: backend
+          path: dist/
+
+
+  bundle:
+    name: Create bundle and upload
+    runs-on: ubuntu-latest
+    needs: [frontend, backend]
+
+    steps:
+      - name: Create dist dir
+        run: mkdir -p dist
+
+      - name: Download frontend
+        uses: actions/download-artifact@v2
+        with:
+          name: frontend
+          path: dist/frontend/
+
+      - name: Download backend
+        uses: actions/download-artifact@v2
+        with:
+          name: backend
+          path: dist/backend/
+
+      - name: Create bundle
+        run: |
+          echo "Bundle created at" $(date) > creation.txt
+          mkdir ../download
+          zip -r ../download/bundle.zip ./*
+        working-directory: dist/
+
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle
+          path: ./download
+
+
+  calculator-docu:
+    name: Document calculator
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout repository content
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
+
+      - name: Build documentation
+        run: |
+          mkdir ./docu
+          cd ./docu
+          javadoc ./../src/calculator/src/main/java/dhbw/Calculator1.java
+      - name: Upload documentation
+        uses: actions/upload-artifact@v2
+        with:
+          name: calculator-docu
+          path: ./docu
+
+
+  calculator-test:
+    name: Test calculator
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v2
+      
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run build with Gradle Wrapper
+        continue-on-error: true
+        run: |
+          chmod +x ./gradlew
+          ./gradlew test
+        working-directory: ./src/calculator/
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: calculator-test
+          path: ./src/calculator/build/reports/tests/test/
+
+
+
