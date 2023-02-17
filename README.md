@@ -41,3 +41,10 @@
 	1. Das Bundle nicht mehr in die main branch pushed (wird später wieder eingefügt)
 	1. Automatisch eine Dokumentation aus den vorhandenen Javadoc Kommentaren erstellt
 	1. Diese Dokumentation als Artefakt hochlädt
+
+
+## Übung 5: Tests durchführen 
+
+1. Erweitern Sie den Workflow, dass er: 
+	1. Die vorhandenen Tests unter `./src/calculator/` ausführt
+	1. Das erstellte Testergebnis (`./src/calculator/build/reports/tests/test/`) als Artefakt hochlädt
