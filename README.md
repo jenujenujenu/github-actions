@@ -29,3 +29,15 @@
 	1. Einen Ordner `dist` erstellt und beide Artefakte in die Ordner `dist/frontend` und `dist/backend` herunterlädt.
 	1. Eine Datei `creation.txt` erstellt, die den Zeitpunkt der Bundle-Erstellung dokumentiert und sie zusammen mit dem `dist` Ordner in ein Archiv `bundle.zip` sichert.
 	1. Den Inhalt des Repository in den Ordner `repo` herunterlädt, die Datei `bundle.zip` dorthin verschiebt und sie mittels **git** in das Repository pushed. Dabei wird die ID (SHA) des Auslösers in der Commit-Message verwendet.
+
+
+## Übung 4: Erstellen einer Dokumentation
+
+1. Fügen Sie Ihrem Repository die Java Klasse `Calculator1` aus der letzten Vorlesung hinzu. Dazu können Sie: 
+	1. Entweder Ihren Fork up-to-date bringen
+	1. Oder einen neuen Fork erstellen
+	1. Alternativ können Sie auch eine eigene Java Klasse mit Unit Test und Javadoc Kommentaren einfügen
+1. Erweitern Sie den Workflow, dass er: 
+	1. Das Bundle nicht mehr in die main branch pushed (wird später wieder eingefügt)
+	1. Automatisch eine Dokumentation aus den vorhandenen Javadoc Kommentaren erstellt
+	1. Diese Dokumentation als Artefakt hochlädt
