@@ -83,24 +83,41 @@ jobs:
       - name: Create bundle
         run: |
           echo "Bundle created at" $(date) > creation.txt
-          rm -f ../bundle.zip
-          zip -r ../bundle.zip ./*
+          mkdir ../download
+          zip -r ../download/bundle.zip ./*
         working-directory: dist/
 
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle
+          path: ./download
+
+
+  calculator-docu:
+    name: Document calculator
+    runs-on: ubuntu-latest
+
+    steps: 
       - name: Checkout repository content
         uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          path: repo/
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
 
-      - name: Move bundle to repo
-        run: mv bundle.zip repo/
-
-      - name: Upload to repo
+      - name: Build documentation
         run: |
-          git config --global user.name 'Bundle Creator'
-          git config --global user.name "bundle@creator.loc"
-          git add bundle.zip
-          git commit -m 'Add bundle for commit ${{ github.sha }}'
-          git push
-        working-directory: repo/
+          mkdir ./docu
+          cd ./docu
+          javadoc ./../src/calculator/src/main/java/dhbw/Calculator1.java
+      - name: Upload documentation
+        uses: actions/upload-artifact@v2
+        with:
+          name: calculator-docu
+          path: ./docu
+
 
